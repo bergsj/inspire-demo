@@ -42,48 +42,24 @@ resource "random_password" "password" {
 }
 
 
-resource "azurerm_resource_group" "rg-keyvault" {
-  location = var.resource_group_location
-  name     = "${var.name}-rg-keyvault"
-}
 
-resource "azurerm_key_vault" "keyvault" {
-  name                                   =  "${var.name}-kv-${random_string.platform-random-id-kv.result}"
-  location                               =  var.resource_group_location
-  resource_group_name                    =  azurerm_resource_group.rg-keyvault.name
-  tenant_id                              =  data.azurerm_client_config.current.tenant_id
-  sku_name                               =  "standard"
-}
+# resource "random_string" "random-id" {
+#   length                      = 5
+#   min_numeric                 = 2
+#   special                     = false
+#   upper                       = false
+# }
 
-data "azurerm_client_config" "current" {}
+# resource "azurerm_resource_group" "rg-storage" {
+#   location = var.resource_group_location
+#   name     = "${var.name}-rg-storage"
+# }
 
-resource "random_string" "platform-random-id-kv" {
-  length                      = 5
-  min_numeric                 = 2
-  special                     = false
-  upper                       = false
-}
-
-
-
-
-resource "random_string" "random-id" {
-  length                      = 5
-  min_numeric                 = 2
-  special                     = false
-  upper                       = false
-}
-
-resource "azurerm_resource_group" "rg-storage" {
-  location = var.resource_group_location
-  name     = "${var.name}-rg-storage"
-}
-
-resource "azurerm_storage_account" "sa" {
-  account_replication_type               =  "LRS"
-  account_tier                           =  "Standard"
-  location                               =  var.resource_group_location
-  min_tls_version                        =  "TLS1_0"
-  name                                   =  "${var.name}sa${random_string.random-id.result}"
-  resource_group_name                    =  azurerm_resource_group.rg-storage.name
-}
+# resource "azurerm_storage_account" "sa" {
+#   account_replication_type               =  "LRS"
+#   account_tier                           =  "Standard"
+#   location                               =  var.resource_group_location
+#   min_tls_version                        =  "TLS1_0"
+#   name                                   =  "${var.name}sa${random_string.random-id.result}"
+#   resource_group_name                    =  azurerm_resource_group.rg-storage.name
+# }

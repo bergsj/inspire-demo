@@ -1,11 +1,11 @@
 terraform {
 
-  cloud {
-    organization = "azabi"
-    workspaces {
-      name = "inspire-demo"
-    }    
-  }
+  # cloud {
+  #   organization = "azabi"
+  #   workspaces {
+  #     name = "inspire-demo"
+  #   }    
+  # }
 
   required_version = ">=1.0"
 
