@@ -48,7 +48,7 @@ resource "azurerm_resource_group" "rg-keyvault" {
 }
 
 resource "azurerm_key_vault" "keyvault" {
-  name                                   =  "${var.name}-${random_id.keyvault_name.hex}"
+  name                                   =  "${var.name}-kv-${random_string.platform-random-id-kv.result}"
   location                               =  var.resource_group_location
   resource_group_name                    =  azurerm_resource_group.rg-keyvault.name
   tenant_id                              =  data.azurerm_client_config.current.tenant_id
@@ -57,7 +57,9 @@ resource "azurerm_key_vault" "keyvault" {
 
 data "azurerm_client_config" "current" {}
 
-resource "random_id" "keyvault_name" {
-  byte_length                            =  5
-  prefix                                 =  "kv-"
+resource "random_string" "platform-random-id-kv" {
+  length                      = 5
+  min_numeric                 = 2
+  special                     = false
+  upper                       = false
 }
