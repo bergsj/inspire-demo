@@ -84,6 +84,6 @@ resource "azurerm_storage_account" "sa" {
   account_tier                           =  "Standard"
   location                               =  var.resource_group_location
   min_tls_version                        =  "TLS1_0"
-  name                                   =  "${var.name}-sa-${random_string.random-id.result}"
+  name                                   =  "${var.name}sa${random_string.random-id.result}"
   resource_group_name                    =  azurerm_resource_group.rg-storage.name
 }
