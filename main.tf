@@ -63,3 +63,27 @@ resource "random_string" "platform-random-id-kv" {
   special                     = false
   upper                       = false
 }
+
+
+
+
+resource "random_string" "random-id" {
+  length                      = 5
+  min_numeric                 = 2
+  special                     = false
+  upper                       = false
+}
+
+resource "azurerm_resource_group" "rg-storage" {
+  location = var.resource_group_location
+  name     = "${var.name}-rg-storage"
+}
+
+resource "azurerm_storage_account" "sa" {
+  account_replication_type               =  "LRS"
+  account_tier                           =  "Standard"
+  location                               =  var.resource_group_location
+  min_tls_version                        =  "TLS1_0"
+  name                                   =  "${var.name}-sa-${random_string.random-id.result}"
+  resource_group_name                    =  azurerm_resource_group.rg-storage.name
+}
