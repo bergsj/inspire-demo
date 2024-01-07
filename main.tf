@@ -44,7 +44,7 @@ resource "random_password" "password" {
 
 resource "azurerm_resource_group" "rg-keyvault" {
   location = var.resource_group_location
-  name     = "${var.name}-rg"
+  name     = "${var.name}-rg-keyvault"
 }
 
 resource "azurerm_key_vault" "keyvault" {
