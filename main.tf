@@ -52,7 +52,7 @@ resource "azurerm_key_vault" "keyvault" {
   location                               =  var.resource_group_location
   resource_group_name                    =  azurerm_resource_group.rg-keyvault.name
   tenant_id                              =  data.azurerm_client_config.current.tenant_id
-  sku_name                               =  "Standard"
+  sku_name                               =  "standard"
 }
 
 data "azurerm_client_config" "current" {}
